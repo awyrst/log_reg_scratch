@@ -4,6 +4,10 @@ Refer to my website for a quick description of the objectives and results - http
 
 We only experimented with a learning rate decay that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
 
+When it came to removing features, we would fit the model, take the absolute value of the parameters/weights, take the mean of those absolute values, and then
+divide every absolute weight value by that mean. If the resulting value was less then a certain threshold percentage of that mean, then we would remove them.
+This is how we were evaluating whether a feature was useful or not. The two thresholds we used were 30% and 120%.
+
 models.py: 
 
 All the code with special functions and classes is in this file. The "model" class has a field for every key 
