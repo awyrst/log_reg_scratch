@@ -1,3 +1,8 @@
+Binary Classification on Chronic Kidney Disease and Defective Battery Datasets
+
+Refer to my website for a quick description of the objectives and results - https://davwyr.com/portfolio/Projects/ML_projects/log_regression_proj/log_regression_proj.html
+
+We only experimented with a learning rate decay that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
 
 models.py: 
 
