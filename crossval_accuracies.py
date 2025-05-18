@@ -11,21 +11,20 @@ df_data2 = pd.read_csv('./Battery_Dataset.csv')
 banana1 = mds.preprocess_visualize(df_data1, "CKD", "randomize")
 banana2 = mds.preprocess_visualize(df_data2, "battery", "randomize")
 
-#this is the array to store the data
+#this is the array to store the data in our csv file later on
 data_csvfile = np.empty((11,2))
 
-#step one is to generate the models with the removed features. Do so as in the rem_30_80_percent_mean.py file.
-# refer to that file for a few more comments on what's happening in this process
-model1_1 = mds.model(1,500,"k+1",banana1)
-model1_2 = mds.model(1,500,"k+1",banana1)
-model1_3 = mds.model(1, 500, "k+1", banana1)
+#step one is to generate the models with the removed features.
+model1_1 = mds.model(1,500,"k+1",banana1) # will later become model 7 in comparison for CKD
+model1_2 = mds.model(1,500,"k+1",banana1) 
+model1_3 = mds.model(1, 500, "k+1", banana1) 
 
 model1_1.normalize()
 model1_2.normalize()
 model1_3.normalize()
 
-model2_1 = mds.model(1,500,"k+1",banana2)
-model2_2 = mds.model(1,500,"k+1",banana2)
+model2_1 = mds.model(1,500,"k+1",banana2) # will later become model 7 in comparison for battery
+model2_2 = mds.model(1,500,"k+1",banana2) 
 model2_3 = mds.model(1, 500, "k+1", banana2)
 
 model2_1.normalize()
@@ -36,25 +35,26 @@ model2_3.normalize()
 mds.fit(model1_2)
 mds.fit(model2_2)
 
-np.delete(model1_2.W, 28)
-np.delete(model2_2.W, 32)
+np.delete(model1_2.W, 28)   #removing these weight values because they contain a dummy value to begin with
+np.delete(model2_2.W, 32)  # and are not useful when trying to figure out which features to remove
 
-model1_2.W = np.abs(model1_2.W)
-mean1 = np.mean(model1_2.W)
-model1_2.W = model1_2.W/mean1 
+model1_2.W = np.abs(model1_2.W) #take the absolute value of the weight values
+mean1 = np.mean(model1_2.W) #take their mean
+model1_2.W = model1_2.W/mean1 #divide each value by the mean
 
-model2_2.W = np.abs(model2_2.W)
+model2_2.W = np.abs(model2_2.W) #same process for other dataset
 mean2 = np.mean(np.abs(model2_2.W))
 model2_2.W = model2_2.W/mean2
 
 
-# make the new models
+# make the new models, these ones will have their features removed if their weights are below 30% of the mean of
+# the absolute value of them all
 
-model1_2_2 = mds.model(1,500,"k+1",banana1)
+model1_2_2 = mds.model(1,500,"k+1",banana1) # will later become model 10 in comparison for CKD
 
 model1_2_2.normalize()
 
-model2_2_2 = mds.model(1,500,"k+1",banana2)
+model2_2_2 = mds.model(1,500,"k+1",banana2) # will later become model 10 in comparison for battery
 
 model2_2_2.normalize()
 
@@ -74,7 +74,7 @@ print(arr1)
 model2_2_2.remove(arr1)
 
 
-                        #Remove the features at the 120% threshold
+                        #Remove the features at the 120% threshold. Same process as with the 30% threshold
 mds.fit(model1_3)
 mds.fit(model2_3)
 
@@ -95,11 +95,11 @@ model2_3.W = model2_3.W/mean2
 
 # make the new models
 
-model1_3_2 = mds.model(1,500,"k+1",banana1)
+model1_3_2 = mds.model(1,500,"k+1",banana1) # will later become model 11 in comparison for CKD
 
 model1_3_2.normalize()
 
-model2_3_2 = mds.model(1,500,"k+1",banana2)
+model2_3_2 = mds.model(1,500,"k+1",banana2) # will later become model 11 in comparison for battery
 
 model2_3_2.normalize()
 
@@ -120,7 +120,7 @@ model2_3_2.remove(arr1)
 
 #now that we have all we need for the models with removed features, generate the other models
 
-#all models for  CKD
+#all remaining models for CKD
 
 m0del1_1 = mds.model(1e-1,500,"constant",banana1)
 m0del1_2 = mds.model(1e-3,500,"constant",banana1)
@@ -147,7 +147,7 @@ for i in range(m0del1_9.X.shape[1]-1):
 for i in range(32):
     m0del1_9.cubic_feature(i)
 
-#normalize all of their data except 7, 10, 11
+#normalize all of their data except 7, 10, 11, since we already handled those ones already
 
 m0del1_1.normalize()
 m0del1_2.normalize()
