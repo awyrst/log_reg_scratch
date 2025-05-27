@@ -1,5 +1,7 @@
 #Binary Classification on Chronic Kidney Disease and Defective Battery Datasets
 
+The work for this project was directly used in the McGill course ECSE 551, and the professor has requested that I not post the code related to this project. 
+
 Refer to my website for a quick description of the objectives and results - https://davwyr.com/portfolio/Projects/ML_projects/log_regression_proj/log_regression_proj.html
 
 We only experimented with a learning rate decay that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
@@ -30,8 +32,7 @@ We also have an additional class called "preprocess_visualize", which takes in t
 and has built-in functions to randomize the data and display statistics on each feature's distribution.
 
 Every model that was run had a maximum number of steps of 500 in gradient descent, and the gradient descent would
-terminate if the percent difference in the norm of the weight vector dropped below 0.1%. We elaborate more on this
-in the report.
+terminate if the percent difference in the norm of the weight vector dropped below 0.1%.
 
 
 crossvalidate_accuracies.py: 
