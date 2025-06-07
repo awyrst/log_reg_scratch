@@ -10,14 +10,4 @@ Model,Feature Modification,Learning Rate,CKD Cross-Validation Accuracy,Battery C
 9,Add Quadradic and Cubic Terms,1/(k+1),66.3636363636364,87.3972602739726
 10,Remove if w < 30% of avg,1/(k+1),68.1818181818182,88.7671232876712
 11,Remove if w < 120% of avg,1/(k+1),70,89.041095890411
-12,,
-13,,
-14,,
-15,,
-16,,
-17,,
-18,,
-19,,
-20,,
-21,,
-22,,
+
