@@ -4,11 +4,13 @@ The work for this project was directly used in the McGill course ECSE 551, and t
 
 Refer to my website for a quick description of the objectives and results - https://davwyr.com/portfolio/Projects/ML_projects/log_regression_proj/log_regression_proj.html
 
-We only experimented with a learning rate decay that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
+I only experimented with a learning rate decay that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
 
-When it came to removing features, we would fit the model, take the absolute value of the parameters/weights, take the mean of those absolute values, and then
-divide every absolute weight value by that mean. If the resulting value was less then a certain threshold percentage of that mean, then we would remove them.
-This is how we were evaluating whether a feature was useful or not. The two thresholds we used were 30% and 120%.
+This is how "less significant" features would be decided:
+
+Fit the model, take the absolute value of the parameters/weights, take the mean of those absolute values, and then
+divide every absolute weight value by that mean. If the resulting value were less than a certain threshold percentage of that mean, it would be removed.
+The two thresholds we used were 30% and 120%.
 
 models.py: 
 
@@ -21,14 +23,14 @@ and a method to remove features as well.
 There is a function called "fit", which takes in an instance of a model and runs gradient descent on the loss function
 to arrive at the optimized values for the weights W.
 
-There is a function called predict, which takes in a model, and outputs the predicted labels.
+There is a function called predict, which takes in a model object and outputs the predicted labels.
 
-There is a function Accu_eval, that takes in the actual labels and predicted labels, and produces an accuracy score.
+There is a function Accu_eval that takes in the actual labels and predicted labels, and produces an accuracy score.
 
 The crossvalidate10 function takes in an array of T models, runs 10-fold cross-validation on them all, and outputs
 an array of each of their cross-validation accuracies.
 
-We also have an additional class called "preprocess_visualize", which takes in the data from the csv files,
+We also have an additional class called "preprocess_visualize", which takes in the data from the CSV files,
 and has built-in functions to randomize the data and display statistics on each feature's distribution.
 
 Every model that was run had a maximum number of steps of 500 in gradient descent, and the gradient descent would
