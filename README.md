@@ -4,9 +4,9 @@ The work for this project was directly used in the McGill course ECSE 551, and t
 
 Refer to my website for a quick description of the objectives and results - https://davwyr.com/portfolio/Projects/ML_projects/log_regression_proj/log_regression_proj.html
 
-I only experimented with a learning rate decay that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
+I only experimented with a learning rate decay method that consisted of dividing the initial learning rate by k+1, where k is the iteration of gradient descent.
 
-This is how "less significant" features would be decided:
+"less significant" features would be decided as follows:
 
 Fit the model, take the absolute value of the parameters/weights, take the mean of those absolute values, and then
 divide every absolute weight value by that mean. If the resulting value were less than a certain threshold percentage of that mean, it would be removed.
